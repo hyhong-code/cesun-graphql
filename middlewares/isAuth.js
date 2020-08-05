@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
-    token = eq.headers.authorization.splid(" ")[1];
+    token = req.headers.authorization.split(" ")[1];
   }
 
   // Handle no token
@@ -26,7 +26,7 @@ module.exports = async (req, res, next) => {
     return next();
   }
 
-  const userId = docoded.id;
+  const userId = decoded.id;
   const user = await User.findById(userId);
 
   // Handle user deleted
@@ -35,7 +35,7 @@ module.exports = async (req, res, next) => {
     return next();
   }
 
+  req.isAuth = true;
   req.user = user;
-  isAuth = true;
   next();
 };

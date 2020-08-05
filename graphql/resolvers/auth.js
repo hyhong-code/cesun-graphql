@@ -23,4 +23,13 @@ module.exports = {
       throw error;
     }
   },
+  loadUser: async (args, req) => {
+    try {
+      if (!req.isAuth) throw new Error("Please log in");
+      return req.user;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
 };
