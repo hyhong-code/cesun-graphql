@@ -1,12 +1,17 @@
 const { buildSchema } = require("graphql");
 
 const authSchema = require("./auth");
+const productSchema = require("./product");
 
 module.exports = buildSchema(`
-  ${authSchema.userType}
-  ${authSchema.authDataType}
-  ${authSchema.registerInput}
-  ${authSchema.loginInput}
+  ${authSchema.UserType}
+  ${authSchema.AuthDataType}
+  ${authSchema.RegisterInput}
+  ${authSchema.LoginInput}
+
+
+  ${productSchema.ProductType}
+  ${productSchema.ProductInput}
 
   type RootQuery {
     ${authSchema.login}
@@ -15,6 +20,7 @@ module.exports = buildSchema(`
 
   type RootMutation {
     ${authSchema.register}
+    ${productSchema.createProduct}
   }
 
   schema {

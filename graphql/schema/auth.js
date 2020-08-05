@@ -1,7 +1,7 @@
 module.exports = {
-  userType: `
+  UserType: `
   type User {
-    _id: String!
+    _id: ID!
     firstName: String!
     lastName: String!
     email: String!
@@ -12,12 +12,12 @@ module.exports = {
     createdAt: String!
   }
   `,
-  authDataType: `
+  AuthDataType: `
   type AuthData {
     token: String!
   }
   `,
-  registerInput: `
+  RegisterInput: `
   input RegisterInput {
     email: String!
     password: String!
@@ -27,7 +27,7 @@ module.exports = {
     address: String!
   }
   `,
-  loginInput: `
+  LoginInput: `
   input LoginInput {
     email: String!
     password: String!
