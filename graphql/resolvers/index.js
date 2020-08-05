@@ -1,7 +1,7 @@
-const authResolver = require("./auth");
+const userResolver = require("./user");
 const productResolver = require("./product");
 
 module.exports = {
-  ...authResolver,
+  ...userResolver,
   ...productResolver,
 };

@@ -22,4 +22,10 @@ module.exports = {
   createProduct: `
   createProduct(input:ProductInput):Product!
   `,
+  getProduct: `
+  getProduct(productId:ID!):Product!
+  `,
+  listProducts: `
+  listProducts:[Product!]!
+  `,
 };

@@ -33,6 +33,14 @@ module.exports = {
     password: String!
   }
   `,
+  UpdateInput: `
+  input UpdateInput {
+    email: String
+    firstName: String
+    lastName: String
+    address: String
+  }
+  `,
   login: `
   login(input:LoginInput):AuthData!
   `,
@@ -41,5 +49,11 @@ module.exports = {
   `,
   register: `
   register(input:RegisterInput):AuthData!
+  `,
+  updateUser: `
+  updateUser(input:UpdateInput):User!
+  `,
+  deleteUser: `
+  deleteUser:ID!
   `,
 };

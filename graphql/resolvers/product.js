@@ -14,4 +14,22 @@ module.exports = {
       throw error;
     }
   },
+  getProduct: async ({ productId }, req) => {
+    try {
+      const product = await Product.findById(productId);
+      return product;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+  listProducts: async () => {
+    try {
+      const products = await Product.find();
+      return products;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
 };

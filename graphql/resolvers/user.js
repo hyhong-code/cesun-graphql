@@ -32,4 +32,27 @@ module.exports = {
       throw error;
     }
   },
+  updateUser: async ({ input }, req) => {
+    try {
+      if (!req.isAuth) throw new Error("Please log in");
+      const user = await User.findByIdAndUpdate(req.user.id, input, {
+        new: true,
+        runValidators: true,
+      });
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+  deleteUser: async (args, req) => {
+    try {
+      if (!req.isAuth) throw new Error("Please log in");
+      const user = await User.findByIdAndDelete(req.user.id);
+      return user.id;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
 };
