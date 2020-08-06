@@ -10,6 +10,7 @@ export default {
         }
         product {
           _id
+          name
         }
         sku
         price

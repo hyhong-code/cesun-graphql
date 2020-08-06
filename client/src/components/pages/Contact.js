@@ -5,7 +5,7 @@ import { getUserOrder } from "../../actions/order";
 import { createForm } from "../../actions/form";
 
 const INITIAL_STATE = {
-  productId: "",
+  product: "",
   subject: "",
   message: "",
   amazonOrderId: "",
@@ -18,7 +18,7 @@ const Contact = ({ user, order, getUserOrder, createForm }) => {
   const [formData, setFormData] = useState(INITIAL_STATE);
 
   const {
-    productId,
+    product,
     subject,
     message,
     amazonOrderId,
@@ -33,18 +33,18 @@ const Contact = ({ user, order, getUserOrder, createForm }) => {
   useEffect(() => {
     if (order.orders.length) {
       setPurchasedProducts(
-        order.orders.reduce((orderedProducts, cur) => {
+        order.orders.reduce((uniqueProducts, curOrder) => {
           if (
-            !orderedProducts
-              .map((product) => product.id)
-              .includes(cur.productId.id)
+            !uniqueProducts
+              .map((product) => product._id)
+              .includes(curOrder.product._id)
           ) {
             return [
-              ...orderedProducts,
-              { id: cur.productId.id, name: cur.productId.name },
+              ...uniqueProducts,
+              { _id: curOrder.product._id, name: curOrder.product.name },
             ];
           } else {
-            return orderedProducts;
+            return uniqueProducts;
           }
         }, [])
       );
@@ -58,6 +58,7 @@ const Contact = ({ user, order, getUserOrder, createForm }) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    console.log(user.isAuthenticated, formData);
     if (user.isAuthenticated) {
       createForm(true, formData);
     } else {
@@ -70,10 +71,10 @@ const Contact = ({ user, order, getUserOrder, createForm }) => {
       <h1>Contact</h1>
       {user.isAuthenticated && order.orders.length ? (
         <form onSubmit={handleSubmit}>
-          <select name="productId" value={productId} onChange={handleChange}>
+          <select name="product" value={product} onChange={handleChange}>
             <option>Select a product</option>
             {purchasedProducts.map((product) => (
-              <option key={product.id} value={product.id}>
+              <option key={product._id} value={product._id}>
                 {product.name}
               </option>
             ))}
