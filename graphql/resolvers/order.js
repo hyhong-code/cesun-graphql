@@ -1,4 +1,3 @@
-const DataLoader = require("dataloader");
 const Order = require("../../model/Order");
 const generateOrderId = require("../../utils/generateOrderId");
 const Product = require("../../model/Product");

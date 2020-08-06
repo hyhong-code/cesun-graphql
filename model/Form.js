@@ -5,11 +5,11 @@ const formSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  productId: {
+  product: {
     type: mongoose.Schema.ObjectId,
     ref: "Product",
   },
-  userId: {
+  user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
   },

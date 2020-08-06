@@ -3,6 +3,7 @@ const { buildSchema } = require("graphql");
 const userSchema = require("./user");
 const productSchema = require("./product");
 const orderSchema = require("./order");
+const formSchema = require("./form");
 
 module.exports = buildSchema(`
   ${userSchema.UserType}
@@ -15,6 +16,10 @@ module.exports = buildSchema(`
   ${productSchema.ProductInput}
 
   ${orderSchema.OrderType}
+
+  ${formSchema.FormType}
+  ${formSchema.GuestFormInput}
+  ${formSchema.AuthFormInput}
 
   type RootQuery {
     ${userSchema.login}
@@ -35,6 +40,9 @@ module.exports = buildSchema(`
     ${productSchema.createProduct}
 
     ${orderSchema.createOrder}
+
+    ${formSchema.createGuestForm}
+    ${formSchema.createAuthForm}
   }
 
   schema {
