@@ -23,7 +23,7 @@ module.exports = {
   createProduct(input:ProductInput):Product!
   `,
   getProduct: `
-  getProduct(productId:ID!):Product!
+  getProduct(slug:String!):Product!
   `,
   listProducts: `
   listProducts:[Product!]!

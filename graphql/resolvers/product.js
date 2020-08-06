@@ -14,9 +14,9 @@ module.exports = {
       throw error;
     }
   },
-  getProduct: async ({ productId }, req) => {
+  getProduct: async ({ slug }, req) => {
     try {
-      const product = await Product.findById(productId);
+      const product = await Product.findOne({ slug });
       return product;
     } catch (error) {
       console.error(error);

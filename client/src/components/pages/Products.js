@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getProducts } from "../../actions/product";
+import { listProducts } from "../../actions/product";
 
-const Products = ({ products, getProducts, history }) => {
+const Products = ({ products, listProducts, history }) => {
   useEffect(() => {
-    getProducts();
-  }, [getProducts]);
+    listProducts();
+  }, [listProducts]);
 
   const handleClick = (slug) => {
     history.push(`/product/${slug}`);
@@ -29,4 +29,4 @@ const Products = ({ products, getProducts, history }) => {
 
 const mapStateToProps = ({ product: { products } }) => ({ products });
 
-export default connect(mapStateToProps, { getProducts })(Products);
+export default connect(mapStateToProps, { listProducts })(Products);

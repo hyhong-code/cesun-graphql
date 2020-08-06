@@ -9,7 +9,7 @@ export default (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
     case PRODUCTS_FETCHED:
-      return { ...state, ...payload };
+      return { ...state, products: payload };
     case PRODUCT_FETCHED:
       return { ...state, selectedProduct: payload };
     default:
