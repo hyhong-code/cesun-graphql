@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import { getOrders } from "../../actions/order";
+import { getUserOrder } from "../../actions/order";
 import { createForm } from "../../actions/form";
 
 const INITIAL_STATE = {
@@ -13,7 +13,7 @@ const INITIAL_STATE = {
   lastName: "",
 };
 
-const Contact = ({ user, order, getOrders, createForm }) => {
+const Contact = ({ user, order, getUserOrder, createForm }) => {
   const [purchasedProducts, setPurchasedProducts] = useState([]);
   const [formData, setFormData] = useState(INITIAL_STATE);
 
@@ -27,8 +27,8 @@ const Contact = ({ user, order, getOrders, createForm }) => {
   } = formData;
 
   useEffect(() => {
-    getOrders();
-  }, [getOrders]);
+    getUserOrder();
+  }, [getUserOrder]);
 
   useEffect(() => {
     if (order.orders.length) {
@@ -140,4 +140,4 @@ const Contact = ({ user, order, getOrders, createForm }) => {
 
 const mapStateToProps = ({ user, order }) => ({ user, order });
 
-export default connect(mapStateToProps, { getOrders, createForm })(Contact);
+export default connect(mapStateToProps, { getUserOrder, createForm })(Contact);

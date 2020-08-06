@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getOrder } from "../../actions/order";
+import { getUserOrder } from "../../actions/order";
 
-const Orders = ({ match, order, getOrder }) => {
+const Orders = ({ match, order, getUserOrder }) => {
   useEffect(() => {
-    getOrder(match.params.id);
-  }, [match.params.id, getOrder]);
+    getUserOrder(match.params.id);
+  }, [match.params.id, getUserOrder]);
 
   return (
     <div>
@@ -20,4 +20,4 @@ const Orders = ({ match, order, getOrder }) => {
 
 const mapStateToProps = ({ order }) => ({ order });
 
-export default connect(mapStateToProps, { getOrder })(Orders);
+export default connect(mapStateToProps, { getUserOrder })(Orders);

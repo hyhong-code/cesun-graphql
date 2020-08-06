@@ -3,13 +3,20 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { login, register } from "../../actions/user";
-import { getOrders, getOrder } from "../../actions/order";
+import { listUserOrders, getUserOrder } from "../../actions/order";
 import "./Profile.scss";
 
-const Profile = ({ user, order, login, register, getOrders, getOrder }) => {
+const Profile = ({
+  user,
+  order,
+  login,
+  register,
+  listUserOrders,
+  getUserOrder,
+}) => {
   useEffect(() => {
-    getOrders();
-  }, [user.isAuthenticated, getOrders]);
+    listUserOrders();
+  }, [user.isAuthenticated, listUserOrders]);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -140,6 +147,6 @@ const mapStateToProps = ({ user, order }) => ({ user, order });
 export default connect(mapStateToProps, {
   login,
   register,
-  getOrders,
-  getOrder,
+  listUserOrders,
+  getUserOrder,
 })(Profile);

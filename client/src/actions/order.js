@@ -1,14 +1,19 @@
 import axios from "axios";
 
+import gql from "../graphql/index";
 import { ORDERS_FETCHED, ORDER_FETCHED, ORDER_ERROR } from "./actionTypes";
 
-export const getOrders = () => async (dispatch) => {
+export const listUserOrders = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/v1/orders");
+    const res = await axios.post(
+      "/graphql",
+      gql.listUserOrders(),
+      gql.config()
+    );
     console.log(res.data);
     dispatch({
       type: ORDERS_FETCHED,
-      payload: res.data.data,
+      payload: res.data.data.listUserOrders,
     });
   } catch (error) {
     dispatch({
@@ -18,13 +23,17 @@ export const getOrders = () => async (dispatch) => {
   }
 };
 
-export const getOrder = (orderId) => async (dispatch) => {
+export const getUserOrder = (orderId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/v1/orders/${orderId}`);
+    const res = await axios.post(
+      "/graphql",
+      gql.getUserOrder(orderId),
+      gql.config()
+    );
     console.log(res.data);
     dispatch({
       type: ORDER_FETCHED,
-      payload: res.data.data.order,
+      payload: res.data.data.getUserOrder,
     });
   } catch (error) {
     dispatch({
