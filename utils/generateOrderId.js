@@ -1,4 +1,4 @@
-module.exports = (lastestOrder, userId) => {
+module.exports = (latestOrder, userId) => {
   // 20200801-5f2357d43777271c4a2a20bf-1
   let orderIdPostfix;
   const date = new Date();
@@ -7,9 +7,9 @@ module.exports = (lastestOrder, userId) => {
     -2
   )}${`0${date.getDate()}`.slice(-2)}`;
 
-  if (lastestOrder && lastestOrder.orderId.startsWith(orderIdPrefix)) {
+  if (latestOrder && latestOrder.orderId.startsWith(orderIdPrefix)) {
     orderIdPostfix = `${
-      parseInt(lastestOrder.orderId.match(/-[0-9a-z]+/gi)[1].substr(1)) + 1
+      parseInt(latestOrder.orderId.match(/-[0-9a-z]+/gi)[1].substr(1)) + 1
     }`;
   } else {
     orderIdPostfix = 1;
