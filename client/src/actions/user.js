@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import gql from "../graphql/index";
 import setJwtHeader from "../utils/setJwtHeader";
 
 import {
@@ -10,23 +11,21 @@ import {
   LOGOUT,
 } from "./actionTypes";
 
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-  },
-};
-
 export const register = (formData) => async (dispatch) => {
   try {
-    const res = await axios.post("/api/v1/auth/register", formData, config);
+    const res = await axios.post(
+      "/graphql",
+      gql.register(formData),
+      gql.config()
+    );
     console.log(res.data);
     dispatch({
       type: USER_REGISTERED,
-      payload: res.data.data.token,
+      payload: res.data.data.register.token,
     });
     dispatch(loadUser());
   } catch (error) {
-    console.error(error);
+    console.error(error.response);
     dispatch({
       type: AUTH_ERROR,
     });
@@ -35,10 +34,11 @@ export const register = (formData) => async (dispatch) => {
 
 export const login = (formData) => async (dispatch) => {
   try {
-    const res = await axios.post("/api/v1/auth/login", formData, config);
+    const res = await axios.post("/graphql", gql.login(formData), gql.config());
+    console.log(res.data);
     dispatch({
       type: USER_LOGGEDIN,
-      payload: res.data.data.token,
+      payload: res.data.data.login.token,
     });
     dispatch(loadUser());
   } catch (error) {
@@ -54,13 +54,13 @@ export const loadUser = () => async (dispatch) => {
     setJwtHeader(localStorage.getItem("jwt"));
   }
   try {
-    const res = await axios.get("/api/v1/auth");
+    const res = await axios.post("/graphql", gql.loadUser(), gql.config());
     dispatch({
       type: USER_LOADED,
-      payload: res.data.data,
+      payload: res.data.data.loadUser,
     });
   } catch (error) {
-    console.error(error);
+    console.error(error.response);
     dispatch({
       type: AUTH_ERROR,
     });

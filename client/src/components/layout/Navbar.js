@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { logout } from "../../actions/auth";
+import { logout } from "../../actions/user";
 
 import "./Navbar.scss";
 
-const Navbar = ({ auth, logout }) => {
+const Navbar = ({ user, logout }) => {
   return (
     <nav>
       <NavLink exact to="/">
@@ -24,11 +24,11 @@ const Navbar = ({ auth, logout }) => {
       <NavLink exact to="/contact">
         Contact
       </NavLink>
-      {auth.isAuthenticated && <button onClick={logout}>Logout</button>}
+      {user.isAuthenticated && <button onClick={logout}>Logout</button>}
     </nav>
   );
 };
 
-const mapStateToProps = ({ auth }) => ({ auth });
+const mapStateToProps = ({ user }) => ({ user });
 
 export default connect(mapStateToProps, { logout })(Navbar);

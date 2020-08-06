@@ -13,7 +13,7 @@ const INITIAL_STATE = {
   lastName: "",
 };
 
-const Contact = ({ auth, order, getOrders, createForm }) => {
+const Contact = ({ user, order, getOrders, createForm }) => {
   const [purchasedProducts, setPurchasedProducts] = useState([]);
   const [formData, setFormData] = useState(INITIAL_STATE);
 
@@ -58,7 +58,7 @@ const Contact = ({ auth, order, getOrders, createForm }) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (auth.isAuthenticated) {
+    if (user.isAuthenticated) {
       createForm(true, formData);
     } else {
       createForm(false, formData);
@@ -68,7 +68,7 @@ const Contact = ({ auth, order, getOrders, createForm }) => {
   return (
     <div>
       <h1>Contact</h1>
-      {auth.isAuthenticated && order.orders.length ? (
+      {user.isAuthenticated && order.orders.length ? (
         <form onSubmit={handleSubmit}>
           <select name="productId" value={productId} onChange={handleChange}>
             <option>Select a product</option>
@@ -138,6 +138,6 @@ const Contact = ({ auth, order, getOrders, createForm }) => {
   );
 };
 
-const mapStateToProps = ({ auth, order }) => ({ auth, order });
+const mapStateToProps = ({ user, order }) => ({ user, order });
 
 export default connect(mapStateToProps, { getOrders, createForm })(Contact);

@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
 import product from "./product";
-import auth from "./auth";
+import user from "./user";
 import order from "./order";
 
-export default combineReducers({ product, auth, order });
+export default combineReducers({ product, user, order });

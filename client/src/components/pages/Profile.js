@@ -2,14 +2,14 @@ import React, { useState, Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { login, register } from "../../actions/auth";
+import { login, register } from "../../actions/user";
 import { getOrders, getOrder } from "../../actions/order";
 import "./Profile.scss";
 
-const Profile = ({ auth, order, login, register, getOrders, getOrder }) => {
+const Profile = ({ user, order, login, register, getOrders, getOrder }) => {
   useEffect(() => {
     getOrders();
-  }, [auth.isAuthenticated, getOrders]);
+  }, [user.isAuthenticated, getOrders]);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -47,7 +47,7 @@ const Profile = ({ auth, order, login, register, getOrders, getOrder }) => {
   return (
     <Fragment>
       <h1>Profile</h1>
-      {!auth.isAuthenticated ? (
+      {!user.isAuthenticated ? (
         <Fragment>
           <form>
             <h2>Register</h2>
@@ -118,7 +118,7 @@ const Profile = ({ auth, order, login, register, getOrders, getOrder }) => {
       ) : (
         <div>
           <h3>User Logged In</h3>
-          <p>{JSON.stringify(auth.user)}</p>
+          <p>{JSON.stringify(user.user)}</p>
           <h3>User orders</h3>
           <ul>
             {" "}
@@ -135,7 +135,7 @@ const Profile = ({ auth, order, login, register, getOrders, getOrder }) => {
   );
 };
 
-const mapStateToProps = ({ auth, order }) => ({ auth, order });
+const mapStateToProps = ({ user, order }) => ({ user, order });
 
 export default connect(mapStateToProps, {
   login,

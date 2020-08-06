@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { loadUser } from "./actions/auth";
+import { loadUser } from "./actions/user";
 import Home from "./components/pages/Home";
 import Products from "./components/pages/Products";
 import Profile from "./components/pages/Profile";

@@ -22,7 +22,7 @@ export default (state = INITIAL_STATE, action) => {
       setJwtHeader(payload);
       return { ...state, isAuthenticated: true };
     case USER_LOADED:
-      return { ...state, isAuthenticated: true, ...payload };
+      return { ...state, isAuthenticated: true, user: payload };
     case LOGOUT:
     case AUTH_ERROR:
       localStorage.removeItem("jwt");

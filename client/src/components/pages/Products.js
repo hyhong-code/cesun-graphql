@@ -16,7 +16,7 @@ const Products = ({ products, listProducts, history }) => {
     <div>
       <h1>Products</h1>
       {products.map((product) => (
-        <div key={product.id}>
+        <div key={product._id}>
           {product.slug}
           <button onClick={() => handleClick(product.slug)}>
             VIEW PRODUCT
